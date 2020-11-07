@@ -72,6 +72,7 @@ class DownloadImages
         // download and save the image to the folder
         foreach ($imagesUrls as $image) {
             $imagePath = $this->processSingleImage($entryId, $image, $url, $relativePath);
+            $this->logger->debug('processHtmlfro', ['imagePath' => $imagePath]);
 
             if (false === $imagePath) {
                 continue;
@@ -317,6 +318,11 @@ class DownloadImages
     {
         $ext = $this->mimeGuesser->guess(current($res->getHeader('content-type')));
         $this->logger->debug('DownloadImages: Checking extension', ['ext' => $ext, 'header' => $res->getHeader('content-type')]);
+
+        if ($ext == 'bin')
+        {
+            $ext = "";
+        }
 
         // ok header doesn't have the extension, try a different way
         if (empty($ext)) {
