@@ -3,12 +3,12 @@
         <div class="card-image waves-effect waves-block waves-light">
             <ul class="card-entry-labels">
             {% for tag in entry.tags | slice(0, 3) %}
-                <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
+                <li title="{{ tag.label }}"><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
             {% endfor %}
             </ul>
             <a href="{{ path('view', { 'id': entry.id }) }}">
                 {% set previewClassModifier = entry.previewPicture ? '' : ' preview--default' %}
-                <span class="preview{{ previewClassModifier }}" style="background-image: url({{ entry.previewPicture | default(asset('wallassets/themes/_global/img/logo-square.svg')) }})"></span>
+                <span class="preview{{ previewClassModifier }}" style="background-image: url({{ entry.previewPicture | default(asset('img/logo-square.svg')) }})"></span>
             </a>
         </div>
         {% include "@WallabagCore/themes/material/Entry/Card/_content.html.twig" with {'entry': entry, 'withPreview': true} only %}
@@ -26,7 +26,7 @@
 
         <ul class="card-entry-labels-hidden">
             {% for tag in entry.tags %}
-                <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
+                <li title="{{ tag.label }}"><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
             {% endfor %}
         </ul>
     </div>

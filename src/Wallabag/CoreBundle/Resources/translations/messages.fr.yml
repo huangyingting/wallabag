@@ -34,6 +34,9 @@ menu:
         site_credentials: Accès aux sites
         ignore_origin_instance_rules: "Règles globales d'omission d'origine"
         quickstart: "Pour bien débuter"
+        theme_toggle_light: "Thème clair"
+        theme_toggle_dark: "Thème sombre"
+        theme_toggle_auto: "Thème automatique"
     top:
         add_new_entry: Sauvegarder un nouvel article
         search: Rechercher
@@ -184,7 +187,7 @@ config:
     form_ignore_origin_rules:
         faq:
             title: "FAQ"
-            ignore_origin_rules_definition_title: "Que signifient les règles d'omission d'origine ?"
+            ignore_origin_rules_definition_title: "Que signifient les règles d'omission d'origine ?"
             ignore_origin_rules_definition_description: "Ce sont des règles utilisées par wallabag pour omettre automatiquement l'adresse d'origine après une redirection.<br />Si une redirection intervient pendant la récupération d'un nouvel article, toutes les règles d'omission (<i>règles utilisateur et instance</i>) seront utilisées afin d'ignorer ou non l'adresse d'origine."
             how_to_use_them_title: "Comment les utiliser ?"
             how_to_use_them_description: "Imaginons que vous vouliez omettre l'origine d'un article provenant de « <i>rss.example.com</i> » (<i>sachant qu'après la redirection, l'adresse réelle est example.com</i>).<br />Dans ce cas, vous devriez mettre « host = \"rss.example.com\" » dans le champ <i>Règle</i>."
@@ -206,8 +209,10 @@ config:
             two_factor_code_description_2: 'Vous pouvez scanner le code QR avec votre application :'
             two_factor_code_description_3: 'N’oubliez pas de sauvegarder ces codes de secours dans un endroit sûr, vous pourrez les utiliser si vous ne pouvez plus accéder à votre application A2F :'
             two_factor_code_description_4: 'Testez un code généré par votre application A2F :'
+            two_factor_code_description_5: 'Si vous ne voyez pas le code QR ou ne pouvez pas le scanner, saisissez la clé suivante dans votre application :'
             cancel: Annuler
             enable: Activer
+            qrcode_label: Code QR
 entry:
     default_title: Titre de l’article
     page_titles:
@@ -273,6 +278,10 @@ entry:
             delete_public_link: Supprimer le lien public
             export: Exporter
             print: Imprimer
+            theme_toggle: Changer le thème
+            theme_toggle_light: "Clair"
+            theme_toggle_dark: "Sombre"
+            theme_toggle_auto: "Automatique"
             problem:
                 label: Un problème ?
                 description: Est-ce que cet article s’affiche mal ?
@@ -393,7 +402,7 @@ quickstart:
     more: Et plus encore…
     intro:
         title: Bienvenue sur wallabag !
-        paragraph_1: Nous allons vous accompagner pour vous faire faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil.
+        paragraph_1: Nous allons vous accompagner pour vous faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil.
         paragraph_2: Suivez-nous !
     configure:
         title: Configurez l’application

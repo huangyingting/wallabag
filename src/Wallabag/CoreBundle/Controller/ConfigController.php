@@ -327,7 +327,7 @@ class ConfigController extends Controller
         $backupCodes = (new BackupCodes())->toArray();
         $backupCodesHashed = array_map(
             function ($backupCode) {
-                return password_hash($backupCode, PASSWORD_DEFAULT);
+                return password_hash($backupCode, \PASSWORD_DEFAULT);
             },
             $backupCodes
         );
@@ -344,6 +344,7 @@ class ConfigController extends Controller
         return $this->render('WallabagCoreBundle:Config:otp_app.html.twig', [
             'backupCodes' => $backupCodes,
             'qr_code' => $this->get('scheb_two_factor.security.google_authenticator')->getQRContent($user),
+            'secret' => $secret,
         ]);
     }
 

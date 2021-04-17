@@ -34,6 +34,9 @@ menu:
         site_credentials: '网站凭证'
         quickstart: "快速开始"
         ignore_origin_instance_rules: 全局性忽略来源规则
+        theme_toggle_auto: 自动根据系统设置应用主题
+        theme_toggle_dark: 深色主题
+        theme_toggle_light: 浅色主题
     top:
         add_new_entry: '添加新项目'
         search: '搜索'
@@ -154,8 +157,8 @@ config:
         export: "导出"
         faq:
             title: '常见问题'
-            tagging_rules_definition_title: '« 标签规则 » 是什么意思？'
-            tagging_rules_definition_description: '它们是 wallabag 用来给新项目自动打上标签的规则。<br />每次一个新项目被添加进来时，所有的标签规则都会作用于这个项目，为它打上你配置好的标签，免去你手动分类项目的麻烦。'
+            tagging_rules_definition_title: '“ 标签规则 ” 是什么意思？'
+            tagging_rules_definition_description: '它们是 Wallabag 用来给新项目自动打上标签的规则。<br />每次一个新项目被添加进来时，所有的标签规则都会作用于这个项目，为它打上你配置好的标签，免去你手动分类项目的麻烦。'
             how_to_use_them_title: '我该怎么使用它们？'
             how_to_use_them_description: '假设你想要在一个新项目的阅读时间短于 3 分钟时，将其标记为 « <i>短阅读</i> »。<br /> 这样的话，你应该在 <i>规则</i> 区域输入 « readingTime &lt;= 3 »，并在 <i>标签</i> 区域输入 « <i>短阅读</i> »。<br /> 可以同时添加数个标签，只需要用半角逗号来隔开它们： « <i>短阅读, 必读</i> »<br /> 可以使用预定义的操作符来编写复杂的规则：if « <i>readingTime &gt;= 5 AND domainName ="github.com"</i> » then tag as « <i>长阅读, github</i> »'
             variables_available_title: '我可以使用哪些变量和操作符来编写规则？'
@@ -193,6 +196,8 @@ config:
             two_factor_code_description_4: '从你配置好的应用中测试 OTP 码:'
             cancel: "取消"
             enable: "启用"
+            two_factor_code_description_5: 如果你看不到二维码或无法扫描它，请在你的应用程序中输入下列双因素认证代码：
+            qrcode_label: 二维码
     form_rss:
         rss_limit: RSS源中的条目数
         rss_link:
@@ -220,7 +225,7 @@ config:
             variables_available_title: 我可以使用哪些变量和操作符来编写规则？
             how_to_use_them_title: 我该怎么使用它们？
             title: 常见问题
-            ignore_origin_rules_definition_title: «忽略来源规则»是什么意思？
+            ignore_origin_rules_definition_title: “忽略来源规则”是什么意思？
             ignore_origin_rules_definition_description: wallabag用它们在重定向后自动忽略源地址。<br />如果在获取新条目时发生重定向，则所有忽略来源规则(<i>用户定义和实例定义</i>)都将被用于忽略源地址。
             variables_available_description: '下列变量和操作符可以用来创建忽略来源规则:'
             how_to_use_them_description: 让我们假设你想忽略一个源自 «<i>rss.example.com</i>»的条目的来源 (<i>知道重定向后，实际地址是example.com</i>)。<br />在那种情况下，你应当把« host = "rss.example.com" »放在<i>规则</i>字段中。
@@ -292,6 +297,10 @@ entry:
             problem:
                 label: '遇到问题？'
                 description: '这篇文章显示不正常？'
+            theme_toggle_auto: 自动
+            theme_toggle_dark: 深色
+            theme_toggle_light: 浅色
+            theme_toggle: 主题切换
         edit_title: '编辑标题'
         original_article: '原始文章'
         annotations_on_the_entry: '{0} 没有标注|{1} 1 个标注 |]1,Inf[ %count% 个标注'
@@ -376,7 +385,7 @@ howto:
         ios: '位于 App Store'
         windows: '位于 Microsoft Store'
     bookmarklet:
-        description: '点按并拖动这个链接到你的书签栏上：'
+        description: '拖放这个链接到你的书签栏上：'
     shortcuts:
         page_description: 以下是 wallabag 中可用的快捷键.
         shortcut: 快捷键
@@ -567,7 +576,7 @@ developer:
         page_title: 'API 客户端管理 > 如何创建我的第一个应用程序'
         description:
             paragraph_1: '以下命令使用了 <a href="https://github.com/jkbrzt/httpie">HTTPie 库</a>。 使用前请确保你已经在系统中安装了它。'
-            paragraph_2: '你需要一个 token 来在你的第三方应用程序和 wallabag API 之间通讯。'
+            paragraph_2: '你需要一个 token 在你的第三方应用程序和 wallabag API 之间通讯。'
             paragraph_3: '为了创建这个 token，你需要 <a href="%link%">创建一个新的客户端</a>。'
             paragraph_4: '现在，创建你的 token（将以下 client_id，client_secret，username and password 替换为有效值)：'
             paragraph_5: 'API 将会返回一个类似下面这样的 response：'

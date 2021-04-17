@@ -58,7 +58,7 @@
                                     {{ form_label(form.config.reading_speed) }}
                                     <p>
                                         {{ 'config.form_settings.reading_speed.help_message'|trans }}
-                                        <a href="http://www.myreadspeed.com/calculate/">myreadspeed</a>
+                                        <a href="https://wallabag.github.io/myreadspeed/">myreadspeed</a>
                                     </p>
                                 </div>
                                 <div class="input-field col s1">
@@ -110,7 +110,7 @@
                                 <div class="input-field col s12">
                                     <h5>{{ 'config.form_settings.android_configuration'|trans }}</h5>
                                     <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" class="waves-effect waves-light btn hide-on-large-only">{{ 'config.form_settings.android_instruction' | trans }}</a>
-                                    <img id="androidQrcode" class="hide-on-med-and-down" />
+                                    <img id="androidQrcode" class="hide-on-med-and-down" alt="{{ 'config.otp.app.qrcode_label' | trans }}" />
                                 </div>
                                 <script>
                                     document.getElementById('androidQrcode').src = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');

@@ -34,6 +34,9 @@ menu:
         site_credentials: Site bilgileri
         quickstart: Hızlı başlangıç
         ignore_origin_instance_rules: Genel orijinal kaynağı yok say kuralları
+        theme_toggle_auto: Otomatik tema
+        theme_toggle_dark: Koyu renk tema
+        theme_toggle_light: Açık renk tema
     top:
         add_new_entry: Yeni bir makale ekle
         search: Ara
@@ -160,7 +163,7 @@ config:
                 and: Bir kural ve diğeri
                 matches: '<i>konu</i>nun <i>arama</i> kriterine (büyük küçük harf duyarsız) eşleştiğini test eder.<br />Örnek: <code>title matches "futbol"</code>'
                 notmatches: '<i>konu</i>nun <i>arama</i> kriterine (büyük küçük harf duyarsız) eşleşmediğini test eder.<br />Örnek: <code>title nonmatches "futbol"</code>'
-            tagging_rules_definition_description: Bunlar Wallabag'in yeni makaleleri otomatik olarak etiketleyebilmesi için tanımlanmış kurallardır.<br />Her yeni makale eklendiğinde, ayarladığınız tüm etiket kuralları kullanılarak makaleniz etiketlenecektir. Bu sayede her bir makaleyi tek tek etiketlemekle uğraşmanız gerekmeyecek.
+            tagging_rules_definition_description: Bunlar wallabag'in yeni makaleleri otomatik olarak etiketleyebilmesi için tanımlanmış kurallardır.<br />Her yeni makale eklendiğinde, ayarladığınız tüm etiket kuralları kullanılarak makaleniz etiketlenecektir. Bu sayede her bir makaleyi tek tek etiketlemekle uğraşmanız gerekmeyecek.
             how_to_use_them_description: 'Örneğin, 3 dakikadan kısa okuma süresi olan yeni makaleleri « <i>kısa okumalar</i>» etiketi ile etiketlemek istiyorsunuz diyelim.<br />Bu durumda, <i>Kural</i> alanına « readingTime &lt; = 3 » değeri, ve de <i>Etiketler</i> alanına da <i>kısa okumalar</i> değerini girmelisiniz.<br /> Eğer birden fazla etiket tanımlamak istiyorsanız arasına virgül koyabilirsiniz: « <i>kısa okumalar, mutlaka oku</i> »<br />Daha kompleks kurallar önden tanımlanmış operatörlerle girilebilir: Eğer « <i> readingTime &gt; = AND domainName = "github.com"</i> » ise, o zaman « <i>uzun okumalar, GitHub</i> » gibi girebilirsiniz'
         if_label: eğer
         then_tag_as_label: ise, şu şekilde etiketle
@@ -191,6 +194,8 @@ config:
             two_factor_code_description_4: 'Yapılandırılmış uygulamanızdan bir OTP kodunu test edin:'
             two_factor_code_description_3: 'Ayrıca, bu yedek kodları güvenli bir yere kaydedin, OTP uygulamanıza erişiminizi kaybetmeniz durumunda kullanabilirsiniz:'
             two_factor_code_description_2: 'Bu QR Kodunu uygulamanızla tarayabilirsiniz:'
+            two_factor_code_description_5: 'Eğer QR Kodu göremiyor veya tarayamıyorsanız, bu kodu uygulamanıza girin:'
+            qrcode_label: Kare kod
         page_title: İki aşamalı kimlik doğrulama
     form_ignore_origin_rules:
         faq:
@@ -283,6 +288,10 @@ entry:
             public_link: herkese açık bağlantı
             delete_public_link: herkese açık bağlantıyı sil
             print: Yazdır
+            theme_toggle_auto: Otomatik
+            theme_toggle_dark: Koyu renk
+            theme_toggle_light: Açık renk
+            theme_toggle: Tema değiştir
         edit_title: Başlığı düzenle
         original_article: orijinal
         created_at: Oluşturulma tarihi

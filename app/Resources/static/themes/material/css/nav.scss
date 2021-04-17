@@ -20,7 +20,8 @@ nav {
 .nav-panel-item .button-collapse {
   margin-left: 0;
   margin-right: 0.5rem;
-  padding: 0 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   height: auto;
   line-height: 1;
   background-color: transparent;
@@ -33,11 +34,15 @@ nav {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+
+  a {
+    padding: 10px 15px;
+  }
 }
 
 .nav-panel-item .material-icons {
-  height: 46px;
-  line-height: 46px;
+  height: auto;
+  line-height: 1;
 }
 
 .nav-input {
@@ -71,7 +76,6 @@ nav {
   }
 
   .input-field input:focus {
-    background-color: #fff;
     border: 0;
     box-shadow: none;
     color: #444;
@@ -108,6 +112,11 @@ nav {
   }
 }
 
+.nav-panel-add,
+.nav-panel-search {
+  background-color: white;
+}
+
 .nav-form-button {
   padding: 0;
   background-color: transparent;
@@ -136,20 +145,29 @@ nav {
   top: 0;
 }
 
+.dropdown-content {
+  width: 100%;
+
+  li {
+    min-height: auto;
+    padding-right: 15px;
+  }
+
+  li > a {
+    display: flex;
+    padding: 14px 10px;
+    align-items: center;
+    white-space: initial;
+  }
+}
+
 @media (min-width: 993px) {
   .button-collapse {
     display: none;
   }
-}
 
-.dropdown-content {
-  min-width: 300px;
-
-  .material-icons {
-    line-height: initial !important;
-  }
-
-  li > a {
-    padding: 10px;
+  .dropdown-content {
+    min-width: 300px;
+    width: initial;
   }
 }

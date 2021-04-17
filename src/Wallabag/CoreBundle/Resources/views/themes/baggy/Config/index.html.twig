@@ -37,7 +37,7 @@
                 {{ form_widget(form.config.reading_speed) }}
                 <p>
                     {{ 'config.form_settings.reading_speed.help_message'|trans }}
-                    <a href="http://www.myreadspeed.com/calculate/">myreadspeed</a>
+                    <a href="https://wallabag.github.io/myreadspeed/">myreadspeed</a>
                 </p>
             </div>
             <a href="#" title="{{ 'config.form_settings.help_reading_speed'|trans }}">
@@ -84,7 +84,7 @@
                 <h3>{{ 'config.form_settings.android_configuration'|trans }}</h3>
                 <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}">{{ 'config.form_settings.android_instruction' | trans }}</a>
                 <br/>
-                <img id="androidQrcode" />
+                <img id="androidQrcode" alt="{{ 'config.otp.app.qrcode_label' | trans }}" />
                 <script>
                     document.getElementById('androidQrcode').src = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
                 </script>

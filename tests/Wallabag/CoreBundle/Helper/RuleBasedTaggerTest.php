@@ -21,7 +21,7 @@ class RuleBasedTaggerTest extends TestCase
     private $logger;
     private $handler;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->rulerz = $this->getRulerZMock();
         $this->tagRepository = $this->getTagRepositoryMock();
@@ -127,6 +127,37 @@ class RuleBasedTaggerTest extends TestCase
             // the method `findOneByLabel` doesn't exist, EntityRepository will then call `_call` method
             // to magically call the `findOneBy` with ['label' => 'foo']
             ->method('__call')
+            ->willReturn($tag);
+
+        $this->tagger->tag($entry);
+
+        $this->assertFalse($entry->getTags()->isEmpty());
+
+        $tags = $entry->getTags();
+        $this->assertSame($tag, $tags[0]);
+        $records = $this->handler->getRecords();
+        $this->assertCount(1, $records);
+    }
+
+    public function testWithMixedCaseTag()
+    {
+        $taggingRule = $this->getTaggingRule('rule as string', ['Foo']);
+        $user = $this->getUser([$taggingRule]);
+        $entry = new Entry($user);
+        $tag = new Tag();
+
+        $this->rulerz
+            ->expects($this->once())
+            ->method('satisfies')
+            ->with($entry, 'rule as string')
+            ->willReturn(true);
+
+        $this->tagRepository
+            ->expects($this->once())
+            // the method `findOneByLabel` doesn't exist, EntityRepository will then call `_call` method
+            // to magically call the `findOneBy` with ['label' => 'foo']
+            ->method('__call')
+            ->with('findOneByLabel', ['foo'])
             ->willReturn($tag);
 
         $this->tagger->tag($entry);

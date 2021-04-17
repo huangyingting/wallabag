@@ -205,10 +205,10 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $authors = $content->getPublishedBy();
-        $this->assertSame('2017-04-05 19:26:13', $content->getPublishedAt()->format('Y-m-d H:i:s'));
+        $this->assertSame('2017-04-05', $content->getPublishedAt()->format('Y-m-d'));
         $this->assertSame('fr', $content->getLanguage());
-        $this->assertSame('Raphaël Balenieri', $authors[0]);
-        $this->assertSame('Frédéric Autran', $authors[1]);
+        $this->assertStringContainsString('Balenieri', $authors[0]);
+        $this->assertStringContainsString('Autran', $authors[1]);
     }
 
     public function testPostNewOkUrlExist()
@@ -857,7 +857,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('li.entry'));
+        $this->assertCount(4, $crawler->filter('li.entry'));
 
         $data = [
             'entry_filter[createdAt][left_date]' => $today->format('Y-m-d'),
@@ -866,7 +866,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('li.entry'));
+        $this->assertCount(4, $crawler->filter('li.entry'));
 
         $data = [
             'entry_filter[createdAt][left_date]' => '1970-01-01',
@@ -919,7 +919,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         ];
 
         $crawler = $client->submit($form, $data);
-        $this->assertCount(5, $crawler->filter('li.entry'));
+        $this->assertCount(4, $crawler->filter('li.entry'));
 
         $crawler = $client->request('GET', '/unread/list');
         $form = $crawler->filter('button[id=submit-filter]')->form();
@@ -928,7 +928,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         ];
 
         $crawler = $client->submit($form, $data);
-        $this->assertCount(5, $crawler->filter('li.entry'));
+        $this->assertCount(4, $crawler->filter('li.entry'));
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $data = [
@@ -948,6 +948,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $form['entry_filter[isArchived]']->tick();
         $form['entry_filter[isStarred]']->untick();
+        $form['entry_filter[isUnread]']->untick();
 
         $crawler = $client->submit($form);
         $this->assertCount(1, $crawler->filter('li.entry'));
@@ -958,6 +959,30 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form);
         $this->assertCount(1, $crawler->filter('li.entry'));
+    }
+
+    public function testFilterPreselectedStatus()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/unread/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+        $this->assertTrue($form['entry_filter[isUnread]']->hasValue());
+        $this->assertFalse($form['entry_filter[isArchived]']->hasValue());
+        $this->assertFalse($form['entry_filter[isStarred]']->hasValue());
+
+        $crawler = $client->request('GET', '/starred/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+        $this->assertFalse($form['entry_filter[isUnread]']->hasValue());
+        $this->assertFalse($form['entry_filter[isArchived]']->hasValue());
+        $this->assertTrue($form['entry_filter[isStarred]']->hasValue());
+
+        $crawler = $client->request('GET', '/all/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+        $this->assertFalse($form['entry_filter[isUnread]']->hasValue());
+        $this->assertFalse($form['entry_filter[isArchived]']->hasValue());
+        $this->assertFalse($form['entry_filter[isStarred]']->hasValue());
     }
 
     public function testFilterOnIsPublic()
@@ -1362,7 +1387,7 @@ class EntryControllerTest extends WallabagCoreTestCase
     {
         return [
             'ru' => [
-                'https://www.pravda.ru/world/09-06-2017/1337283-qatar-0/',
+                'https://www.vtimes.io/2020/12/14/ubiistvo-kotorogo-ne-bilo-a1981',
                 'ru',
             ],
             'fr' => [
@@ -1434,7 +1459,7 @@ class EntryControllerTest extends WallabagCoreTestCase
      */
     public function testRestrictedArticle()
     {
-        $url = 'https://www.monde-diplomatique.fr/2017/05/BONNET/57475';
+        $url = 'https://www.monde-diplomatique.fr/2017/05/BONNET/57476';
         $this->logInAs('admin');
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
@@ -1476,7 +1501,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
-        $this->assertSame('Crimes et réformes aux Philippines', $content->getTitle());
+        $this->assertSame('Quand Manille manœuvre', $content->getTitle());
 
         $client->getContainer()->get('craue_config')->set('restricted_access', 0);
     }
